@@ -15,7 +15,8 @@ import '../event_widget/container/my_container.dart';
 /// both host and guest.
 class UserPage extends StatefulWidget {
 	Map events = <DateTime, List<Event<EventArgs>>>{
-		DateTime.now(): [Event()],
+		DateTime(2023, 5, 26): [Event()],
+		DateTime(2023, 5, 27): [Event(), Event()],
 	};
 	
 	UserPage({super.key});
@@ -29,6 +30,7 @@ class _UserPageState extends State<UserPage> {
 	var _selectedDay = DateTime.now();
 	var _focusedDay = DateTime.now();
 	var _selectedEvents = <Event>[];
+	late List<Widget> _selectedWidgets;
 
 	final DateFormat formatter = DateFormat('dd/MM/yyyy');
 	final carouselOpt = CarouselOptions(
@@ -48,17 +50,22 @@ class _UserPageState extends State<UserPage> {
 		return widget.events[day] ?? [];
 	}
 
-	/// Returns the list of events to be shown in 'banner' widget.
-	List<Widget> _buildList(List<Event> events) {
-		List<Widget> content = [];
+	/// Updates the list of events to be shown in 'banner' widget.
+	/// If given list 'events' is empty then fills the list with a proper widget,
+	/// otherwise it includes a widget for each element in the provided list.
+	void _buildList(List<Event> events) {
+		//List<Widget> content = [];
+		_selectedWidgets.clear();
 
 		if(events.isEmpty) {
-			content.add(
+			//content.add(
+			_selectedWidgets.add(
 				const Text('No events for today', textAlign: TextAlign.center,)
 			);
 		} else {
 			for(int i = 0; i < events.length; i++) {
-				content.add(
+				//content.add(
+				_selectedWidgets.add(
 					MyContainer(
 						title: 'Will of the People!',
 						subtitle: "L'evento di Rock Alternativo dell'anno!",
@@ -69,17 +76,18 @@ class _UserPageState extends State<UserPage> {
 			}
 		}
 
-		return content;
+		//return content;
 	}
 
 	/// Returns the list of events for the specified day and renders it.
 	void _onDaySelected(UserPage widget, DateTime selectedDay, DateTime focusedDay) {
-		//_focusedDay = focusedDay;
+		_focusedDay = focusedDay;
 		_selectedDay = selectedDay;
 		_selectedEvents = _getEventsForDay(widget, selectedDay);
 
 		setState(() {
-			//_buildList(_selectedEvents);
+			print('Number of events: ${_selectedEvents.length}');
+			_buildList(_selectedEvents);
 		});
 	}
 
@@ -87,7 +95,7 @@ class _UserPageState extends State<UserPage> {
 	Widget build(BuildContext context) {
 		Widget banner = CarouselSlider(
 			options: carouselOpt,
-			items: _buildList(_selectedEvents).map((i) => Builder(
+			items: _selectedWidgets.map((i) => Builder(
 				builder: (BuildContext context) {
 					return Container(
 						// width: MediaQuery.of(context).size.width,
