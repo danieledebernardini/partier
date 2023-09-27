@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:partier/routing/app_router.dart';
 import '../event_widget/container/my_fancy_container.dart';
 import '../../services/auth_service.dart';
+import 'package:partier/model/event.dart';
 
 
 /// Home page of the application.
@@ -26,25 +27,29 @@ class DiscoverPage  extends StatelessWidget {
     FirebaseFirestore.instance.collection('events')
     .where("public", isEqualTo: true)
     .where("event_date", isGreaterThan: DateTime.now())
+    .withConverter(
+      fromFirestore: Event.fromFirestore,
+      toFirestore: (event, options) => event.toFirestore())
     .snapshots();
 
   /// Given a query snapshot, creates a list of widgets representing events
   /// retrieved by the stream.
   List<Widget> createEventContainers(AsyncSnapshot<QuerySnapshot> snapshot) {
-    return snapshot.data!.docs.map((DocumentSnapshot doc) {
-      Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
+    Event event;
+    DateTime eventDate;
 
-      DateTime date = data['event_date'].toDate();
+    return snapshot.data!.docs.map((DocumentSnapshot doc) {
+      event = doc.data()! as Event;
+      eventDate = event.eventDate;
 
       return Container(
         alignment: Alignment.center,
         //width: MediaQuery.of(this).size.width,
         //height: MediaQuery.of(context).size.height*0.25,
         child: MyFancyContainer(
-          id: doc.id,
-          title: data['name_event'],
-          date: //"${date.day}-${date.month}-${date.year}",
-            formatter.format(date),
+          id: event.id,
+          title: event.nameEvent,
+          date: formatter.format(eventDate),
         )
       );
     })

@@ -26,7 +26,7 @@ class Event {
     this.public
   });
 
-  final String? id;
+  final String id;
   final String nameEvent;
   final DateTime eventDate;
   final String? description;
