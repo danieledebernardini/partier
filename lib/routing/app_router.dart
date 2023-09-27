@@ -49,7 +49,7 @@ class HomeRoute extends GoRouteData {
 class DiscoveryRoute extends GoRouteData {
   @override
   Widget build(BuildContext context,  GoRouterState state) {
-    return const DiscoverPage();
+    return DiscoverPage();
   }
 }
 

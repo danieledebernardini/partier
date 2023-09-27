@@ -10,16 +10,11 @@ import '../../services/auth_service.dart';
 /// Home page of the application.
 /// This widget will contain an upper bar and an istance of page widget. In
 /// particular, through a button will get access to the user's options.
-class DiscoverPage extends StatefulWidget {
+class DiscoverPage  extends StatelessWidget {
   final String title = 'Partier';
 
-  const DiscoverPage({super.key});
+  DiscoverPage({super.key});
 
-  @override
-  State<DiscoverPage> createState() => _DiscoverPage();
-}
-
-class _DiscoverPage extends State<DiscoverPage> {
   final formatter = DateFormat('d/M/y');
 
   /// TODO: Not saving login info
@@ -43,8 +38,8 @@ class _DiscoverPage extends State<DiscoverPage> {
 
       return Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height*0.25,
+        //width: MediaQuery.of(this).size.width,
+        //height: MediaQuery.of(context).size.height*0.25,
         child: MyFancyContainer(
           id: doc.id,
           title: data['name_event'],
@@ -58,17 +53,10 @@ class _DiscoverPage extends State<DiscoverPage> {
   }
 
   @override
-  void dispose() {
-    _eventsStream.drain();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
         actions: [
           IconButton(
             onPressed: () async {
