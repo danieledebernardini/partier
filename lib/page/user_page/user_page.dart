@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '../event_widget/container/my_container.dart';
 import 'package:partier/model/event.dart';
 
 

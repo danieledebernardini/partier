@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 import 'package:partier/routing/app_router.dart';
-import '../event_widget/container/my_fancy_container.dart';
+import '../event_widget/event_container/event_container.dart';
 import '../../services/auth_service.dart';
 import 'package:partier/model/event.dart';
 
@@ -15,8 +15,6 @@ class DiscoverPage  extends StatelessWidget {
   final String title = 'Partier';
 
   DiscoverPage({super.key});
-
-  final formatter = DateFormat('d/M/y');
 
   /// TODO: Not saving login info
   //var api = Api();
@@ -36,21 +34,15 @@ class DiscoverPage  extends StatelessWidget {
   /// retrieved by the stream.
   List<Widget> createEventContainers(AsyncSnapshot<QuerySnapshot> snapshot) {
     Event event;
-    DateTime eventDate;
 
     return snapshot.data!.docs.map((DocumentSnapshot doc) {
       event = doc.data()! as Event;
-      eventDate = event.eventDate;
 
       return Container(
         alignment: Alignment.center,
         //width: MediaQuery.of(this).size.width,
         //height: MediaQuery.of(context).size.height*0.25,
-        child: MyFancyContainer(
-          id: event.id,
-          title: event.nameEvent,
-          date: formatter.format(eventDate),
-        )
+        child: EventContainer(event: event),
       );
     })
     .toList()

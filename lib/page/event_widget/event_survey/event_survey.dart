@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:survey_kit/survey_kit.dart';
 
 
-class Poll extends StatelessWidget {
-  Poll({
+class EventSurvey extends StatelessWidget {
+  EventSurvey({
     super.key,
     required this.title,
   });
