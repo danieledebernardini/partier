@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:partier/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
-import '../../routing/app_router.dart';
+import 'package:partier/routing/app_router.dart';
+import 'package:partier/services/auth_service.dart';
 
 class BottomBarWidget extends StatelessWidget {
   // Class variables

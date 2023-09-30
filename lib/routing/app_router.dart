@@ -1,32 +1,35 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'package:partier/page/apiTest_page/apiTest.dart';
-import 'package:partier/page/bottomBar_widget/bottomBar_widget.dart';
-import 'package:partier/page/create_page/create_page.dart';
-import 'package:partier/page/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 
+import '../model/event.dart';
+import '../page/bottomBar_widget/bottomBar_widget.dart';
+import '../page/create_page/create_page.dart';
 import '../page/discover_page/discover_page.dart';
+import '../page/event_widget/event_widget.dart';
+import '../page/login_page/login_page.dart';
 import '../page/user_page/user_page.dart';
 import '../services/auth_service.dart';
 
 part 'app_router.g.dart';
 
+
+/// The following ShellRoute is defined to make the BottomBarWidget behave as
+/// navigator for the buttons it contains.
 @TypedShellRoute<BottomBarShellRoute>(
-    routes: <TypedRoute<RouteData>>[
-      TypedGoRoute<HomeRoute>(
-        path: '/',
-      ),
-      TypedGoRoute<DiscoveryRoute>(
-        path: '/discovery',
-      ),
-      TypedGoRoute<CreateEventRoute>(
-        path: '/create-event',
-      ),
-      TypedGoRoute<UserEventRoute>(
-        path: '/user-event',
-      )
-    ]
+  routes: <TypedRoute<RouteData>>[
+    TypedGoRoute<HomeRoute>(
+      path: '/',
+    ),
+    TypedGoRoute<DiscoveryRoute>(
+      path: '/discovery',
+    ),
+    TypedGoRoute<CreateEventRoute>(
+      path: '/create-event',
+    ),
+    TypedGoRoute<UserEventRoute>(
+      path: '/user-event',
+    ),
+  ]
 )
 
 class BottomBarShellRoute extends ShellRouteData {
@@ -58,7 +61,6 @@ class CreateEventRoute extends GoRouteData {
   @override
   Widget build(BuildContext context,  GoRouterState state) {
     return CreatePage();
-    //return const ApiTestPage();
   }
 }
 
@@ -83,6 +85,22 @@ class EventDetailRoute extends GoRouteData {
     return CreatePage();
   }
 }
+
+/*
+@immutable
+class EventRoute extends GoRouteData {
+  final Event event;
+
+  const EventRoute({
+    required this.event,
+  });
+
+  @override
+  Widget build(BuildContext context,  GoRouterState state) {
+    return EventWidget(event: event);
+  }
+}
+ */
 
 @TypedGoRoute<LoginRoute>(path: '/login')
 class LoginRoute extends GoRouteData {
