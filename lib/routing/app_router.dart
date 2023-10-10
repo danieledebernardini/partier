@@ -22,6 +22,12 @@ part 'app_router.g.dart';
     ),
     TypedGoRoute<DiscoveryRoute>(
       path: '/discovery',
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<EventRoute>(
+          name: 'event',
+          path: '/event',
+        ),
+      ],
     ),
     TypedGoRoute<CreateEventRoute>(
       path: '/create-event',
@@ -86,21 +92,15 @@ class EventDetailRoute extends GoRouteData {
   }
 }
 
-/*
 @immutable
 class EventRoute extends GoRouteData {
-  final Event event;
-
-  const EventRoute({
-    required this.event,
-  });
-
   @override
   Widget build(BuildContext context,  GoRouterState state) {
+    Event event = state.extra as Event;
+
     return EventWidget(event: event);
   }
 }
- */
 
 @TypedGoRoute<LoginRoute>(path: '/login')
 class LoginRoute extends GoRouteData {

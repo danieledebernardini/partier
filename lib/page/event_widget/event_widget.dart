@@ -34,7 +34,7 @@ class EventWidget extends StatelessWidget {
               backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
               appBar: AppBar(
                 title: Text(
-                  event.nameEvent,
+                  event.eventName,
                   style: const TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold

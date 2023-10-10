@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../event_widget.dart';
 import 'package:partier/model/event.dart';
+import 'package:partier/routing/app_router.dart';
 
 
 class EventContainer extends StatelessWidget {
@@ -27,6 +29,7 @@ class EventContainer extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => _buildEventDialog(),
         );
+        //context.goNamed("event", extra: event);
       },
       child: Container(
         alignment: Alignment.center,
@@ -98,7 +101,7 @@ class EventContainer extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text(
-                                event.nameEvent,
+                                event.eventName,
                                 style: const TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,

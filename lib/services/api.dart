@@ -99,7 +99,7 @@ class Api {
     for (var doc in eventsQuery.docs) {
       eventsHashMap[doc.get('id')] = Event(
           id: doc.get('id'),
-          nameEvent: doc.get('name_event'),
+          eventName: doc.get('name_event'),
           creationDate: doc.get('creation_date'),
           description: doc.get('description'),
           dressCode: doc.get('dress_code'),

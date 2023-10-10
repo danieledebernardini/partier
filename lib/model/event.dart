@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:meta/meta.dart';
+
 
 // TODO: add participants
 class Event {
@@ -16,7 +15,7 @@ class Event {
 
   Event({
     required this.id,
-    required this.nameEvent,
+    required this.eventName,
     required this.eventDate,
     this.description,
     this.dressCode,
@@ -27,7 +26,7 @@ class Event {
   });
 
   final String id;
-  final String nameEvent;
+  final String eventName;
   final DateTime eventDate;
   final String? description;
   final String? dressCode;
@@ -41,7 +40,7 @@ class Event {
     late String event;
 
     event = 'Event $id: \n'
-            '- Name: $nameEvent; \n'
+            '- Name: $eventName; \n'
             '- Date: $eventDate; \n';
 
     return event;
@@ -56,7 +55,7 @@ class Event {
 
     return Event(
       id: snapshot.id,
-      nameEvent: data?['name_event'],
+      eventName: data?['name_event'],
       creationDate: data?['creation_date'].toDate(),
       description: data?['description'],
       dressCode: data?['dress_code'],
@@ -70,7 +69,7 @@ class Event {
 
   Map<String, dynamic> toFirestore() {
     return {
-      "name_event": nameEvent,
+      "name_event": eventName,
       "event_date": Timestamp.fromDate(eventDate),
 
       if(dressCode != null) "dress_code": dressCode,
@@ -84,7 +83,7 @@ class Event {
 
   Map toMap() {
     Map<String, dynamic> map = {
-      columnNameEvent: nameEvent,
+      columnNameEvent: eventName,
       columnCreationDate: creationDate,
       columnDescription: description,
       columnDressCode: dressCode,
